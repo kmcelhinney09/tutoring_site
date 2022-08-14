@@ -1,0 +1,2 @@
+class TutoredSubjectsController < ApplicationController
+end

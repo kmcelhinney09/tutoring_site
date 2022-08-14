@@ -1,0 +1,2 @@
+class RequestedSubjectsController < ApplicationController
+end

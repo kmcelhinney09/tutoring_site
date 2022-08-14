@@ -1,0 +1,2 @@
+class BookedTimeSlotsController < ApplicationController
+end

@@ -1,0 +1,2 @@
+class OnlineResourcesController < ApplicationController
+end

@@ -1,0 +1,2 @@
+class RequestedSubject < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class TutoringTimeSlot < ApplicationRecord
+end

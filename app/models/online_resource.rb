@@ -1,0 +1,2 @@
+class OnlineResource < ApplicationRecord
+end

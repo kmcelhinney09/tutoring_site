@@ -1,0 +1,2 @@
+class LocationSchedulesController < ApplicationController
+end

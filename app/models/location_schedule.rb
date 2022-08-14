@@ -1,0 +1,2 @@
+class LocationSchedule < ApplicationRecord
+end
