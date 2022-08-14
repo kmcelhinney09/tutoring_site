@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_secure_password
   #password validation was adapted from chowderhead on dev.to at https://dev.to/nodefiend/rails-password-validation-29kj
   validate :password_lower_case
   validate :password_uppercase
@@ -25,9 +26,5 @@ class User < ApplicationRecord
   def password_contains_number
     return if password.count("0-9") > 0
     errors.add :password, ' must contain at least one number'
-  end
-
-  def create
-    
   end
 end
