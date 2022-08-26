@@ -1,14 +1,8 @@
-import React from "react";
-import Home from "./components/Home";
+import { useState, useEffect } from "react";
 import NavBar from "./components/NavBar";
 
 function App() {
-  return (
-    <>
-      <NavBar />
-      <Home />
-    </>
-  );
+  return <NavBar />;
 }
 
 export default App;
