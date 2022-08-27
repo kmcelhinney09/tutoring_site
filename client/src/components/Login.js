@@ -42,12 +42,13 @@ function Login({ closeForm, setCurrentUser }) {
       body: JSON.stringify(loginForm),
     }).then((res) => {
       if (res.ok) {
-        res.json().then(console.log(res));
+        res.json().then((user) => setCurrentUser(user));
       } else {
         res.json().then((e) => setErrors(Object.entries(e.error)));
         // res.json().then((e) => console.log(Object.entries(e.error)));
       }
     });
+    closeForm();
   }
 
   return (
