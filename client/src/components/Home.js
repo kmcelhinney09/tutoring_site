@@ -8,7 +8,7 @@ import Modal from "react-bootstrap/Modal";
 import SignUp from "./SignUp";
 import Login from "./Login";
 
-function Home({ setCurrentUser }) {
+function Home() {
   const [showSignUp, setShowSignUp] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
 
@@ -63,7 +63,6 @@ function Home({ setCurrentUser }) {
         <Modal.Body>
           <SignUp
             closeForm={handleCloseSignUp}
-            setCurrentUser={setCurrentUser}
           />
         </Modal.Body>
       </Modal>
@@ -73,7 +72,7 @@ function Home({ setCurrentUser }) {
           <Modal.Title>Login to Tutoring</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Login closeForm={handleCloseLogin} setCurrentUser={setCurrentUser} />
+          <Login closeForm={handleCloseLogin} />
         </Modal.Body>
       </Modal>
     </>

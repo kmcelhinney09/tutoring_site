@@ -1,12 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
@@ -14,24 +8,18 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/esm/Button";
 import Home from "./components/Home";
 import UserDashboard from "./components/UserDashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
+import { useAuth } from "./context/AuthProvider";
 
 function App() {
-  const [currentUser, setCurrentUser] = useState({});
+  const auth = useAuth();
 
   useEffect(() => {
-    fetch("/auth").then((res) => {
-      if (res.ok) {
-        res.json().then((user) => setCurrentUser(user));
-      }
-    });
+    auth.auto();
   }, []);
 
   function handleLogout() {
-    fetch("/logout", {
-      method: "DELETE",
-    }).then();
-    <Navigate to="/" />;
-    setCurrentUser({});
+    auth.logout();
   }
   return (
     <Router>
@@ -61,12 +49,14 @@ function App() {
                 </NavDropdown>
               </Nav>
               <Nav>
-                {Object.keys(currentUser).length == 0 ? null : (
+                {!!auth.currentUser ? (
                   <Button variant="success" onClick={handleLogout}>
                     Logout
                   </Button>
-                )}
-                <Nav.Link href="">{currentUser.full_name}</Nav.Link>
+                ) : null}
+                <Nav.Link href="">
+                  {!!auth.currentUser ? auth.currentUser.full_name : null}
+                </Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Container>
@@ -74,9 +64,15 @@ function App() {
       </div>
       <div>
         <Routes>
-          {console.log(currentUser)}
-          <Route path="/" element={<Home setCurrentUser={setCurrentUser} />} />
-          <Route path="/user" element={<UserDashboard />} />
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/user"
+            element={
+              <ProtectedRoute isAllowed={!!auth.currentUser}>
+                <UserDashboard />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </div>
     </Router>

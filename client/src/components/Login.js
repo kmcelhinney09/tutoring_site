@@ -1,14 +1,16 @@
 import { useState } from "react";
+import { useAuth } from "../context/AuthProvider";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-function Login({ closeForm, setCurrentUser }) {
+function Login({ closeForm }) {
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
   });
-
+  
   const [errors, setErrors] = useState([]);
+  const auth = useAuth();
 
   function renderErrors() {
     const error_text = errors.map((error, index) => {
@@ -35,19 +37,7 @@ function Login({ closeForm, setCurrentUser }) {
   }
   function handleSignUpSubmit(e) {
     e.preventDefault();
-
-    fetch("/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(loginForm),
-    }).then((res) => {
-      if (res.ok) {
-        res.json().then((user) => setCurrentUser(user));
-      } else {
-        res.json().then((e) => setErrors(Object.entries(e.error)));
-        // res.json().then((e) => console.log(Object.entries(e.error)));
-      }
-    });
+    auth.login(loginForm)
     closeForm();
   }
 
