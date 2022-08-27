@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-function SignUp({ closeForm, setCurrentUser }) {
+function SignUp({ closeForm }) {
   const [signUpForm, setSignUpForm] = useState({
     email: "",
     full_name: "",
@@ -73,6 +73,20 @@ function SignUp({ closeForm, setCurrentUser }) {
           value={signUpForm.full_name}
           onChange={handleFormOnChange}
           name="full_name"
+        />
+        <Form.Control
+          type="text"
+          placeholder="School"
+          value={signUpForm.school}
+          onChange={handleFormOnChange}
+          name="school"
+        />
+        <Form.Control
+          type="text"
+          placeholder="grade"
+          value={signUpForm.grade}
+          onChange={handleFormOnChange}
+          name="grade"
         />
         <Form.Control
           type="password"
