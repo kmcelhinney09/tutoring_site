@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -16,6 +16,15 @@ import UserDashboard from "./components/UserDashboard";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
+
+  useEffect(() => {
+    fetch("/auth").then((res) => {
+      if (res.ok) {
+        res.json().then((user) => setCurrentUser(user));
+      }
+    });
+  }, []);
+
   return (
     <Router>
       {console.log(currentUser)}
@@ -45,10 +54,10 @@ function App() {
                 </NavDropdown>
               </Nav>
               <Nav>
-                {currentUser.length==0 ?null:<Nav.Link href="#deets">Logout</Nav.Link>}
-                <Nav.Link eventKey={2} href="#memes">
-                  {currentUser.full_name}
-                </Nav.Link>
+                {currentUser.length == 0 ? null : (
+                  <Nav.Link href="#deets">Logout</Nav.Link>
+                )}
+                <Nav.Link href="">{currentUser.full_name}</Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Container>
@@ -56,10 +65,7 @@ function App() {
       </div>
       <div>
         <Routes>
-          <Route
-            path="/"
-            element={<Home setCurrentUser={setCurrentUser} />}
-          />
+          <Route path="/" element={<Home setCurrentUser={setCurrentUser} />} />
           <Route path="/user" element={<UserDashboard />} />
         </Routes>
       </div>

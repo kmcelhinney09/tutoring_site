@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
 rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
 
-  def index
-    render json: {user: "User Data"}
+  def show
+    current_user = User.find(session[:user_id])
+    render json: current_user
   end
 
   def create
