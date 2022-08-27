@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
-
+  skip_before_action :authorized, only: :create
+  
   def show
     current_user = User.find(session[:user_id])
     render json: current_user
