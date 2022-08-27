@@ -71,7 +71,8 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={auth.isLoggedIn?<Navigate to="/user"/>:<Home />} />
+            element={auth.isLoggedIn ? <Navigate to="/user" /> : <Home />}
+          />
           <Route
             path="/user"
             element={

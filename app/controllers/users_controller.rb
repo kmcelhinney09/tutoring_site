@@ -10,7 +10,6 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
   def create
     user = User.create!(user_params)
     session[:user_id] = user.id
-    session[:user_role] = user.role
     render json: user
   end
 
