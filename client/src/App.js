@@ -11,6 +11,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/esm/Button";
 import Home from "./components/Home";
 import UserDashboard from "./components/UserDashboard";
 
@@ -25,9 +26,15 @@ function App() {
     });
   }, []);
 
+  function handleLogout() {
+    fetch("/logout", {
+      method: "DELETE",
+    }).then();
+    <Navigate to="/" />;
+    setCurrentUser({});
+  }
   return (
     <Router>
-      {console.log(currentUser)}
       <div>
         <Navbar collapseOnSelect expand="lg" bg="success" variant="dark">
           <Container>
@@ -54,8 +61,10 @@ function App() {
                 </NavDropdown>
               </Nav>
               <Nav>
-                {currentUser.length == 0 ? null : (
-                  <Nav.Link href="#deets">Logout</Nav.Link>
+                {Object.keys(currentUser).length == 0 ? null : (
+                  <Button variant="success" onClick={handleLogout}>
+                    Logout
+                  </Button>
                 )}
                 <Nav.Link href="">{currentUser.full_name}</Nav.Link>
               </Nav>
@@ -65,6 +74,7 @@ function App() {
       </div>
       <div>
         <Routes>
+          {console.log(currentUser)}
           <Route path="/" element={<Home setCurrentUser={setCurrentUser} />} />
           <Route path="/user" element={<UserDashboard />} />
         </Routes>
