@@ -45,7 +45,7 @@ function App() {
                 </NavDropdown>
               </Nav>
               <Nav>
-                <Nav.Link href="#deets">More deets</Nav.Link>
+                {currentUser.length==0 ?null:<Nav.Link href="#deets">Logout</Nav.Link>}
                 <Nav.Link eventKey={2} href="#memes">
                   {currentUser.full_name}
                 </Nav.Link>
