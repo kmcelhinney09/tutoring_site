@@ -44,8 +44,7 @@ function SignUp({ closeForm }) {
 
   function handleSignUpSubmit(e) {
     e.preventDefault();
-
-   auth.signup(signUpForm);
+    auth.signup(signUpForm);
     closeForm();
   }
 

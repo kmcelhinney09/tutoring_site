@@ -15,6 +15,7 @@ function useProvideAuth() {
   const [currentUser, setCurrentUser] = useState(null);
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   function login(loginForm) {
     setIsLoading(true);
@@ -24,6 +25,7 @@ function useProvideAuth() {
       body: JSON.stringify(loginForm),
     }).then((res) => {
       if (res.ok) {
+        setIsLoggedIn(true);
         res.json().then((user) => setCurrentUser(user));
       } else {
         res.json().then((e) => setErrors(Object.entries(e.error)));
@@ -41,6 +43,7 @@ function useProvideAuth() {
       body: JSON.stringify(signUpForm),
     }).then((res) => {
       if (res.ok) {
+        setIsLoggedIn(true);
         res.json().then(setCurrentUser);
       } else {
         // res.json().then((e) => setErrors(Object.entries(e.error)));
@@ -54,6 +57,7 @@ function useProvideAuth() {
       method: "DELETE",
     }).then((res) => {
       if (res.ok) {
+        setIsLoggedIn(false);
         setCurrentUser(null);
       }
     });
@@ -63,6 +67,8 @@ function useProvideAuth() {
     fetch("/auth").then((res) => {
       if (res.ok) {
         res.json().then((user) => setCurrentUser(user));
+      } else {
+        setIsLoggedIn(false);
       }
     });
   }
@@ -75,5 +81,6 @@ function useProvideAuth() {
     auto,
     errors,
     isLoading,
+    isLoggedIn,
   };
 }

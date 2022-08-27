@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Navigate } from "react-router-dom";
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -8,7 +9,7 @@ import Modal from "react-bootstrap/Modal";
 import SignUp from "./SignUp";
 import Login from "./Login";
 
-function Home() {
+function Home({ loggedin, setLoggedin }) {
   const [showSignUp, setShowSignUp] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
 
@@ -61,9 +62,7 @@ function Home() {
           <Modal.Title>Sign-Up for Tutoring</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <SignUp
-            closeForm={handleCloseSignUp}
-          />
+          <SignUp closeForm={handleCloseSignUp} setLoggedin={setLoggedin} />
         </Modal.Body>
       </Modal>
 
@@ -72,7 +71,7 @@ function Home() {
           <Modal.Title>Login to Tutoring</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Login closeForm={handleCloseLogin} />
+          <Login closeForm={handleCloseLogin} setLoggedin={setLoggedin} />
         </Modal.Body>
       </Modal>
     </>

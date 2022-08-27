@@ -1,6 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  Navigate,
+} from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
@@ -13,7 +19,6 @@ import { useAuth } from "./context/AuthProvider";
 
 function App() {
   const auth = useAuth();
-
   useEffect(() => {
     auth.auto();
   }, []);
@@ -49,13 +54,13 @@ function App() {
                 </NavDropdown>
               </Nav>
               <Nav>
-                {!!auth.currentUser ? (
+                {auth.isLoggedIn ? (
                   <Button variant="success" onClick={handleLogout}>
                     Logout
                   </Button>
                 ) : null}
                 <Nav.Link href="">
-                  {!!auth.currentUser ? auth.currentUser.full_name : null}
+                  {auth.isLoggedIn ? auth.currentUser.full_name : null}
                 </Nav.Link>
               </Nav>
             </Navbar.Collapse>
@@ -64,11 +69,13 @@ function App() {
       </div>
       <div>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            element={auth.isLoggedIn?<Navigate to="/user"/>:<Home />} />
           <Route
             path="/user"
             element={
-              <ProtectedRoute isAllowed={!!auth.currentUser}>
+              <ProtectedRoute isAllowed={auth.isLoggedIn}>
                 <UserDashboard />
               </ProtectedRoute>
             }

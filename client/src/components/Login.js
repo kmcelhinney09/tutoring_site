@@ -3,7 +3,7 @@ import { useAuth } from "../context/AuthProvider";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-function Login({ closeForm }) {
+function Login({ closeForm}) {
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
