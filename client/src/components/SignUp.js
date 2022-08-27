@@ -2,10 +2,12 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-function SignUp({ closeForm }) {
+function SignUp({ closeForm, setCurrentUser }) {
   const [signUpForm, setSignUpForm] = useState({
     email: "",
     full_name: "",
+    school: "",
+    grade: "",
     password: "",
     password_confirmation: "",
   });
@@ -37,6 +39,7 @@ function SignUp({ closeForm }) {
       [name]: value,
     });
   }
+
   function handleSignUpSubmit(e) {
     e.preventDefault();
 
@@ -46,12 +49,13 @@ function SignUp({ closeForm }) {
       body: JSON.stringify(signUpForm),
     }).then((res) => {
       if (res.ok) {
-        res.json().then(console.log(res));
+        res.json().then(setCurrentUser);
       } else {
         // res.json().then((e) => setErrors(Object.entries(e.error)));
         res.json().then((e) => console.log(Object.entries(e.error)));
       }
     });
+    closeForm();
   }
 
   return (
@@ -83,7 +87,7 @@ function SignUp({ closeForm }) {
         />
         <Form.Control
           type="text"
-          placeholder="grade"
+          placeholder="Grade"
           value={signUpForm.grade}
           onChange={handleFormOnChange}
           name="grade"

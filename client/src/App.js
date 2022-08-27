@@ -1,14 +1,24 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { useState } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  Navigate,
+} from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Container from "react-bootstrap/Container";
 import Home from "./components/Home";
+import UserDashboard from "./components/UserDashboard";
 
 function App() {
+  const [currentUser, setCurrentUser] = useState({});
   return (
     <Router>
+      {console.log(currentUser)}
       <div>
         <Navbar collapseOnSelect expand="lg" bg="success" variant="dark">
           <Container>
@@ -37,7 +47,7 @@ function App() {
               <Nav>
                 <Nav.Link href="#deets">More deets</Nav.Link>
                 <Nav.Link eventKey={2} href="#memes">
-                  {"Kevin McElhinney"}
+                  {currentUser.full_name}
                 </Nav.Link>
               </Nav>
             </Navbar.Collapse>
@@ -46,7 +56,11 @@ function App() {
       </div>
       <div>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            element={<Home setCurrentUser={setCurrentUser} />}
+          />
+          <Route path="/user" element={<UserDashboard />} />
         </Routes>
       </div>
     </Router>

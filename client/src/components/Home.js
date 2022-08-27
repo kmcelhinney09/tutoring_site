@@ -8,7 +8,7 @@ import Modal from "react-bootstrap/Modal";
 import SignUp from "./SignUp";
 import Login from "./Login";
 
-function Home() {
+function Home({ setCurrentUser }) {
   const [showSignUp, setShowSignUp] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
 
@@ -57,22 +57,23 @@ function Home() {
     <>
       {splashScreen()}
       <Modal show={showSignUp} onHide={handleCloseSignUp}>
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>Sign-Up for Tutoring</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <SignUp
             closeForm={handleCloseSignUp}
+            setCurrentUser={setCurrentUser}
           />
         </Modal.Body>
       </Modal>
 
       <Modal show={showLogin} onHide={handleCloseLogin}>
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>Login to Tutoring</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Login closeForm={handleCloseLogin} />
+          <Login closeForm={handleCloseLogin} setCurrentUser={setCurrentUser} />
         </Modal.Body>
       </Modal>
     </>
