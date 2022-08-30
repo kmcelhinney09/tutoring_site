@@ -34,6 +34,7 @@ function Login({ closeForm}) {
       [name]: value,
     });
   }
+
   function handleSignUpSubmit(e) {
     e.preventDefault();
     auth.login(loginForm)
