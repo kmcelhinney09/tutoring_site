@@ -25,7 +25,6 @@ function useProvideAuth() {
       body: JSON.stringify(loginForm),
     }).then((res) => {
       if (res.ok) {
-        setIsLoggedIn(true);
         res.json().then((user) => setCurrentUser(user));
       } else {
         res.json().then((e) => setErrors(Object.entries(e.error)));

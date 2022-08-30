@@ -29,7 +29,6 @@ function Login({ closeForm}) {
   function handleFormOnChange(e) {
     let name = e.target.name;
     let value = e.target.value;
-    console.log(name, value);
     setLoginForm({
       ...loginForm,
       [name]: value,
