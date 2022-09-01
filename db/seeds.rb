@@ -46,7 +46,8 @@ puts "Creating Locations"
   Location.create!(
     name:Faker::Educator.university, 
     building:Faker::Educator.campus + " Hall",
-    capacity:rand(1..15)
+    capacity:rand(1..15),
+    school_id:rand(1..10)
   )
 end
 

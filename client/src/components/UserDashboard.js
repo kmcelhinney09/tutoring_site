@@ -7,9 +7,12 @@ import Nav from "react-bootstrap/esm/Nav";
 import UserInfo from "./UserInfo";
 import TutoringSignup from "./TutoringSignup";
 import TeacherDashboard from "./TeacherDashboard"
+import OnlineResources from "./OnlineResources"
+import SessionSignup from "./SessionSignup";
+import AdminControl from "./AdminControl";
 
 function UserDashboard() {
-  const auth = useAuth();
+  const userRole = useAuth().currentUser.role;
 
   return (
     <div>
@@ -23,19 +26,23 @@ function UserDashboard() {
               <Nav.Item>
                 <Nav.Link eventKey="tutoringSignup">Tutoring Sign-up</Nav.Link>
               </Nav.Item>
-              {auth.currentUser.role !== "tutee"?
+              <Nav.Item>
+                <Nav.Link eventKey="onlineResources">Online Resources</Nav.Link>
+              </Nav.Item>
+              <Nav.Item></Nav.Item>
+              {userRole !== "tutee"?
                 <Nav.Item>
                 <Nav.Link eventKey="sessionSignup">Session Signup</Nav.Link>
               </Nav.Item>:null
               }
-              {auth.currentUser.role === "teacher" || auth.currentUser.role === "admin"?
+              {userRole === "teacher" || userRole === "admin"?
                 <Nav.Item>
                 <Nav.Link eventKey="teacherDashboard">Teacher Dashboard</Nav.Link>
               </Nav.Item>:null
               }
-              {auth.currentUser.role === "admin"?
+              {userRole === "admin"?
               <Nav.Item>
-                <Nav.Link eventKey="adminControl">Tutoring Sign-up</Nav.Link>
+                <Nav.Link eventKey="adminControl">Admin Control</Nav.Link>
               </Nav.Item>: null
               }
             </Nav>
@@ -49,13 +56,16 @@ function UserDashboard() {
                 <TutoringSignup />
               </Tab.Pane>
               <Tab.Pane eventKey="sessionSignup">
-                <UserInfo />
+                <SessionSignup />
               </Tab.Pane>
               <Tab.Pane eventKey="teacherDashboard">
                 <TeacherDashboard />
               </Tab.Pane>
               <Tab.Pane eventKey="adminControl">
-                <TutoringSignup />
+                <AdminControl />
+              </Tab.Pane>
+              <Tab.Pane eventKey="onlineResources">
+                <OnlineResources />
               </Tab.Pane>
             </Tab.Content>
           </Col>
