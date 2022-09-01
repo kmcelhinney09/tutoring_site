@@ -28,7 +28,7 @@ function UserDashboard() {
                 <Nav.Link eventKey="sessionSignup">Session Signup</Nav.Link>
               </Nav.Item>:null
               }
-              {auth.currentUser.role !== ("tutee"||"tutor")?
+              {auth.currentUser.role === "teacher" || auth.currentUser.role === "admin"?
                 <Nav.Item>
                 <Nav.Link eventKey="teacherDashboard">Teacher Dashboard</Nav.Link>
               </Nav.Item>:null
