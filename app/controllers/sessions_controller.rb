@@ -11,6 +11,17 @@ class SessionsController < ApplicationController
     end
   end
 
+  def info
+    current_user = User.find(session[:user_id])
+
+    tutor_sessions = current_user.tutor_sessions
+    if current_user.role == "tutor"
+      tutoring_sessions = current_user.tutoring_sessions
+    end
+    user_info = [current_user,tutor_sessions,tutoring_sessions,tutor_sessions]
+    render json: user_info
+  end
+
   def destroy
     session.delete :user_id
     head :no_content
