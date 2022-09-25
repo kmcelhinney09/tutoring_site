@@ -21,7 +21,6 @@ function App() {
   const auth = useAuth();
 
   useEffect(() => {
-    console.log("Use Effect Fired");
     auth.auto();
   }, []);
 

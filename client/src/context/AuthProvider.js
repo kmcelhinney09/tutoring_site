@@ -14,6 +14,7 @@ export const useAuth = () => {
 function useProvideAuth() {
   const [currentUser, setCurrentUser] = useState([
     {
+      // id: "",
       full_name: "",
       school: "",
       grade: "",
