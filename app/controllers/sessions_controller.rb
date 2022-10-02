@@ -13,12 +13,7 @@ class SessionsController < ApplicationController
 
   def info
     current_user = User.find(session[:user_id])
-
-    tutor_sessions = current_user.tutor_sessions
-    if current_user.role == "tutor"
-      tutoring_sessions = current_user.tutoring_sessions
-    end
-    user_info = [current_user,tutor_sessions,tutoring_sessions,tutor_sessions]
+    user_info = [current_user, current_user.tutoring_sessions, current_user.tutor_sessions, current_user.notes_from_tutor, current_user.notes_from_teachers]
     render json: user_info
   end
 
