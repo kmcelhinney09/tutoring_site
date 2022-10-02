@@ -23,7 +23,7 @@ function UserDashboard() {
             <Nav.Item>
                 <Nav.Link eventKey="userHome">User Home</Nav.Link>
               </Nav.Item>
-              {userRole == "tutee" || userRole == "tutor"?
+              {userRole === "tutee" || userRole === "tutor"?
               <Nav.Item>
                 <Nav.Link eventKey="dashboard">Dashboard</Nav.Link>
               </Nav.Item>:null
@@ -35,7 +35,7 @@ function UserDashboard() {
                 <Nav.Link eventKey="onlineResources">Online Resources</Nav.Link>
               </Nav.Item>
               <Nav.Item></Nav.Item>
-              {userRole == "tutor"?
+              {userRole === "tutor"?
                 <Nav.Item>
                 <Nav.Link eventKey="sessionSignup">Session Signup</Nav.Link>
               </Nav.Item>:null

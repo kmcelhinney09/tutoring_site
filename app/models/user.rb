@@ -8,6 +8,7 @@ class User < ApplicationRecord
   #  https://stackoverflow.com/questions/4632408/understanding-source-option-of-has-one-has-many-through-of-rails
   has_many :tutor_time_slots, :through => :tutors, :source => :tutoring_time_slot
   has_many :tutee_time_slots, :through => :tutees, :source => :tutoring_time_slot
+  belongs_to :school
 
   after_initialize do
     if self.new_record?

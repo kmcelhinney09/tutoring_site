@@ -14,7 +14,7 @@ function UserInfo() {
           console.log(data);
           setUserInfo({
             full_name: data[0].full_name,
-            school: data[0].school,
+            school: data[6],
             grade: data[0].grade,
             role: data[0].role,
             current_sessions: data[1],
