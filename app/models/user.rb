@@ -34,7 +34,14 @@ class User < ApplicationRecord
     tutor_notes_arry = notes.map{|note| {id:note.id, tutor_name:note.tutor.full_name, tutor_note:note.note}}
   end
 
-  def class_schedules
+  def class_schedule
     classes = ClassSchedule.where(student_id:self.id).to_a
+    class_list = classes.map{|class_data| {
+      class_period:class_data.class_period.number,
+      start_time:class_data.class_period.start_time,
+      end_time:class_data.class_period.end_time,
+      teacher:User.find(class_data.teacher_id).full_name,
+      subject:class_data.subject.name
+      }}
   end
 end

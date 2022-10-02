@@ -20,18 +20,13 @@ function UserInfo() {
             current_sessions: data[1],
             tutor_notes: data[3],
             teacher_notes: data[4],
+            class_schedule: data[5],
           });
         });
       }
     });
     setLoading(false);
   }, []);
-
-  function date_time_parsing(date_time) {
-    const start_time = format(new Date(date_time.date_start_time), "PPpp");
-    const end_time = format(new Date(date_time.date_end_time), "PPpp");
-    return " " + start_time + " - " + end_time;
-  }
 
   return (
     <>
@@ -41,6 +36,27 @@ function UserInfo() {
           <h6>Grade: {userInfo.grade}</h6>
           <h6>Role: {userInfo.role}</h6>
           <h6>Class Schedule</h6>
+          <Card style={{ width: "50rem" }}>
+            <ListGroup variant="flush">
+              {userInfo.class_schedule
+              .sort((a,b) => {
+                return a.class_period> b.class_period ?1:-1;
+              })
+              .map((classPeriod) => {
+                const start_time = format(
+                  new Date(classPeriod.start_time),
+                  "p"
+                );
+                const end_time = format(new Date(classPeriod.end_time), "p");
+                return (
+                  <ListGroup.Item>
+                    {classPeriod.subject} - Period {classPeriod.class_period} with {classPeriod.teacher} from {start_time} to {end_time}
+                  </ListGroup.Item>
+                );
+              })}
+            </ListGroup>
+          </Card>
+
           <h6>Current Tutoring Sessions:</h6>
           <Card style={{ width: "26rem" }}>
             <ListGroup variant="flush">
