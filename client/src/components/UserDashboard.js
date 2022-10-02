@@ -16,13 +16,18 @@ function UserDashboard() {
 
   return (
     <div>
-      <Tab.Container id="left-tabs-example" defaultActiveKey="dashboard">
+      <Tab.Container id="left-tabs-example" defaultActiveKey="userHome">
         <Row>
           <Col sm={3}>
             <Nav variant="pills" className="flex-column">
+            <Nav.Item>
+                <Nav.Link eventKey="userHome">User Home</Nav.Link>
+              </Nav.Item>
+              {userRole == "tutee" || userRole == "tutor"?
               <Nav.Item>
                 <Nav.Link eventKey="dashboard">Dashboard</Nav.Link>
-              </Nav.Item>
+              </Nav.Item>:null
+              }
               <Nav.Item>
                 <Nav.Link eventKey="tutoringSignup">Tutoring Sign-up</Nav.Link>
               </Nav.Item>
@@ -30,7 +35,7 @@ function UserDashboard() {
                 <Nav.Link eventKey="onlineResources">Online Resources</Nav.Link>
               </Nav.Item>
               <Nav.Item></Nav.Item>
-              {userRole !== "tutee"?
+              {userRole == "tutor"?
                 <Nav.Item>
                 <Nav.Link eventKey="sessionSignup">Session Signup</Nav.Link>
               </Nav.Item>:null
@@ -49,6 +54,9 @@ function UserDashboard() {
           </Col>
           <Col sm={9}>
             <Tab.Content>
+            <Tab.Pane eventKey="userHome">
+                <h1>User Home</h1>
+              </Tab.Pane>
               <Tab.Pane eventKey="dashboard">
                 <UserInfo />
               </Tab.Pane>

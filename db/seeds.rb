@@ -1,6 +1,6 @@
 puts "Seeding Data"
 grade_level = ["k","1","2","3","4","5","6","7","8","freshman", "sophomore", "junior", "senior"]
-puts "creating users"
+puts "Creating Users"
 10.times do
   fake_name = Faker::Name.name
   fake_email = Faker::Internet.email
