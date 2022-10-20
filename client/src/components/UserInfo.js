@@ -39,21 +39,22 @@ function UserInfo() {
           <Card style={{ width: "50rem" }}>
             <ListGroup variant="flush">
               {userInfo.class_schedule
-              .sort((a,b) => {
-                return a.class_period> b.class_period ?1:-1;
-              })
-              .map((classPeriod) => {
-                const start_time = format(
-                  new Date(classPeriod.start_time),
-                  "p"
-                );
-                const end_time = format(new Date(classPeriod.end_time), "p");
-                return (
-                  <ListGroup.Item>
-                    {classPeriod.subject} - Period {classPeriod.class_period} with {classPeriod.teacher} from {start_time} to {end_time}
-                  </ListGroup.Item>
-                );
-              })}
+                .sort((a, b) => {
+                  return a.class_period > b.class_period ? 1 : -1;
+                })
+                .map((classPeriod) => {
+                  const start_time = format(
+                    new Date(classPeriod.start_time),
+                    "p"
+                  );
+                  const end_time = format(new Date(classPeriod.end_time), "p");
+                  return (
+                    <ListGroup.Item>
+                      {classPeriod.subject} - Period {classPeriod.class_period}{" "}
+                      with {classPeriod.teacher} from {start_time} to {end_time}
+                    </ListGroup.Item>
+                  );
+                })}
             </ListGroup>
           </Card>
 
