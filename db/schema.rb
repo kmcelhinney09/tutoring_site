@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_02_042406) do
+ActiveRecord::Schema.define(version: 2022_10_22_034605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 2022_10_02_042406) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "school_id"
+    t.integer "tutoring_time_slot_id"
   end
 
   create_table "online_resources", force: :cascade do |t|
@@ -114,7 +115,6 @@ ActiveRecord::Schema.define(version: 2022_10_02_042406) do
     t.integer "tutor_capacity"
     t.integer "tutee_capacity"
     t.boolean "booked_status"
-    t.integer "location_id"
     t.datetime "date_start_time"
     t.datetime "date_end_time"
     t.datetime "created_at", precision: 6, null: false

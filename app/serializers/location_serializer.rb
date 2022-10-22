@@ -1,4 +1,5 @@
 class LocationSerializer < ActiveModel::Serializer
   attributes :id, :name, :building, :capacity
-  has_many :tutoring_time_slots
+  belongs_to :school
+  belongs_to :tutoring_time_slot
 end

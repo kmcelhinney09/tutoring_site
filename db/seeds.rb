@@ -12,7 +12,7 @@ end
 
 puts "Creating TimeSlots"
 10.times do
-  TutoringTimeSlot.create!(created_by:rand(1..11), tutor_capacity: rand(1..4), tutee_capacity: (1..12), booked_status: false, location_id: rand(1..5), date_start_time: DateTime.new(2022,8,28,8,0,0), date_end_time: DateTime.new(2022,8,28,10,0,0))
+  TutoringTimeSlot.create!(created_by:rand(1..11), tutor_capacity: rand(1..4), tutee_capacity: (1..12), booked_status: false, date_start_time: DateTime.new(2022,8,28,8,0,0), date_end_time: DateTime.new(2022,8,28,10,0,0))
 end
 
 puts "Creating Subjects"
@@ -47,7 +47,8 @@ puts "Creating Locations"
     name:"Room number: #{ rand(1..400)}", 
     building:Faker::Educator.campus + " Hall",
     capacity:rand(1..15),
-    school_id:rand(1..10)
+    school_id:rand(1..10),
+    tutoring_time_slot_id:rand(1..10)
   )
 end
 

@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
   enum role: [:tutee, :tutor, :teacher, :admin]
+  has_many :booked_time_slots, foreign_key: 'tutee_id'
   has_many :tutors, class_name: 'BookedTimeSlot', foreign_key: 'tutor_id'
   has_many :tutees, class_name: 'BookedTimeSlot', foreign_key: 'tutee_id'
   has_many :teachers, class_name: 'TeacherNote', foreign_key: 'teacher_id'
@@ -38,6 +39,7 @@ class User < ApplicationRecord
   def class_schedule
     classes = ClassSchedule.where(student_id:self.id).to_a
     class_list = classes.map{|class_data| {
+      id:class_data.class_period.id,
       class_period:class_data.class_period.number,
       start_time:class_data.class_period.start_time,
       end_time:class_data.class_period.end_time,

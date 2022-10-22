@@ -1,4 +1,4 @@
 class Location < ApplicationRecord
   belongs_to :school
-  has_many :tutoring_time_slots
+  belongs_to :tutoring_time_slot
 end

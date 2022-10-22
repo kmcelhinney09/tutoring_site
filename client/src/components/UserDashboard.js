@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthProvider";
 import Tab from "react-bootstrap/Tab";
 import Row from "react-bootstrap/esm/Row";
@@ -6,13 +6,35 @@ import Col from "react-bootstrap/esm/Col";
 import Nav from "react-bootstrap/esm/Nav";
 import UserInfo from "./UserInfo";
 import TutoringSignup from "./TutoringSignup";
-import TeacherDashboard from "./TeacherDashboard"
-import OnlineResources from "./OnlineResources"
+import TeacherDashboard from "./TeacherDashboard";
+import OnlineResources from "./OnlineResources";
 import SessionSignup from "./SessionSignup";
 import AdminControl from "./AdminControl";
 
 function UserDashboard() {
   const userRole = useAuth().currentUser.role;
+  const userSchool = useAuth().currentUser.school_id;
+  const [userData, setUserData] = useState(false);
+
+  useEffect(() => {
+    fetch("/user_info").then((res) => {
+      if (res.ok) {
+        res.json().then((data) => {
+          // console.log(data);
+          setUserData({
+            full_name: data[0].full_name,
+            school: data[6],
+            grade: data[0].grade,
+            role: data[0].role,
+            current_sessions: data[1],
+            tutor_notes: data[3],
+            teacher_notes: data[4],
+            class_schedule: data[5],
+          });
+        });
+      }
+    });
+  }, []);
 
   return (
     <div>
@@ -20,14 +42,14 @@ function UserDashboard() {
         <Row>
           <Col sm={3}>
             <Nav variant="pills" className="flex-column">
-            <Nav.Item>
+              <Nav.Item>
                 <Nav.Link eventKey="userHome">User Home</Nav.Link>
               </Nav.Item>
-              {userRole === "tutee" || userRole === "tutor"?
-              <Nav.Item>
-                <Nav.Link eventKey="dashboard">Dashboard</Nav.Link>
-              </Nav.Item>:null
-              }
+              {userRole === "tutee" || userRole === "tutor" ? (
+                <Nav.Item>
+                  <Nav.Link eventKey="dashboard">Dashboard</Nav.Link>
+                </Nav.Item>
+              ) : null}
               <Nav.Item>
                 <Nav.Link eventKey="tutoringSignup">Tutoring Sign-up</Nav.Link>
               </Nav.Item>
@@ -35,33 +57,35 @@ function UserDashboard() {
                 <Nav.Link eventKey="onlineResources">Online Resources</Nav.Link>
               </Nav.Item>
               <Nav.Item></Nav.Item>
-              {userRole === "tutor"?
+              {userRole === "tutor" ? (
                 <Nav.Item>
-                <Nav.Link eventKey="sessionSignup">Session Signup</Nav.Link>
-              </Nav.Item>:null
-              }
-              {userRole === "teacher" || userRole === "admin"?
+                  <Nav.Link eventKey="sessionSignup">Session Signup</Nav.Link>
+                </Nav.Item>
+              ) : null}
+              {userRole === "teacher" || userRole === "admin" ? (
                 <Nav.Item>
-                <Nav.Link eventKey="teacherDashboard">Teacher Dashboard</Nav.Link>
-              </Nav.Item>:null
-              }
-              {userRole === "admin"?
-              <Nav.Item>
-                <Nav.Link eventKey="adminControl">Admin Control</Nav.Link>
-              </Nav.Item>: null
-              }
+                  <Nav.Link eventKey="teacherDashboard">
+                    Teacher Dashboard
+                  </Nav.Link>
+                </Nav.Item>
+              ) : null}
+              {userRole === "admin" ? (
+                <Nav.Item>
+                  <Nav.Link eventKey="adminControl">Admin Control</Nav.Link>
+                </Nav.Item>
+              ) : null}
             </Nav>
           </Col>
           <Col sm={9}>
             <Tab.Content>
-            <Tab.Pane eventKey="userHome">
+              <Tab.Pane eventKey="userHome">
                 <h1>User Home</h1>
               </Tab.Pane>
               <Tab.Pane eventKey="dashboard">
-                <UserInfo />
+                <UserInfo userData={userData} />
               </Tab.Pane>
               <Tab.Pane eventKey="tutoringSignup">
-                <TutoringSignup />
+                <TutoringSignup school_id={userSchool} />
               </Tab.Pane>
               <Tab.Pane eventKey="sessionSignup">
                 <SessionSignup />

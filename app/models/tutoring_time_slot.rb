@@ -1,5 +1,5 @@
 class TutoringTimeSlot < ApplicationRecord
   has_many :booked_time_slots
-  belongs_to :location
-
+  has_many :locations
+  has_many :schools, through: :locaitons
 end
