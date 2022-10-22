@@ -44,7 +44,7 @@ end
 puts "Creating Locations"
 10.times do
   Location.create!(
-    name:Faker::Educator.university, 
+    name:"Room number: #{ rand(1..400)}", 
     building:Faker::Educator.campus + " Hall",
     capacity:rand(1..15),
     school_id:rand(1..10)

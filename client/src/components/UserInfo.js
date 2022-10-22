@@ -11,7 +11,7 @@ function UserInfo() {
     fetch("/user_info").then((res) => {
       if (res.ok) {
         res.json().then((data) => {
-          console.log(data);
+          // console.log(data);
           setUserInfo({
             full_name: data[0].full_name,
             school: data[6],
