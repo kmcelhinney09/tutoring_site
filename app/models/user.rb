@@ -5,10 +5,8 @@ class User < ApplicationRecord
   has_many :tutors, class_name: 'BookedTimeSlot', foreign_key: 'tutor_id'
   has_many :tutees, class_name: 'BookedTimeSlot', foreign_key: 'tutee_id'
   has_many :teachers, class_name: 'TeacherNote', foreign_key: 'teacher_id'
-  #found the info for this method from 
-  #  https://stackoverflow.com/questions/4632408/understanding-source-option-of-has-one-has-many-through-of-rails
-  has_many :tutor_time_slots, :through => :tutors, :source => :tutoring_time_slot
-  has_many :tutee_time_slots, :through => :tutees, :source => :tutoring_time_slot
+  has_many :tutor_slot_sign_ups, class_name: 'TutorSlotSignUp', foreign_key: 'tutor_id'
+  
   belongs_to :school
 
   after_initialize do
