@@ -8,26 +8,20 @@ function UserInfo({ userData }) {
     <>
       {userData ? (
         <div>
-          <h6>School: {userData.school}</h6>
+          <h6>School: {userData.school.school_name}</h6>
           <h6>Grade: {userData.grade}</h6>
           <h6>Role: {userData.role}</h6>
           <h6>Class Schedule</h6>
           <Card style={{ width: "50rem" }}>
             <ListGroup variant="flush">
-              {userData.class_schedule
-                .sort((a, b) => {
-                  return a.class_period > b.class_period ? 1 : -1;
-                })
+              {userData.student_schedule
+                .sort((a, b) => (a.class_period > b.class_period ? 1 : -1))
                 .map((classPeriod) => {
-                  const start_time = format(
-                    new Date(classPeriod.start_time),
-                    "p"
-                  );
-                  const end_time = format(new Date(classPeriod.end_time), "p");
                   return (
                     <ListGroup.Item key={classPeriod.id}>
                       {classPeriod.subject} - Period {classPeriod.class_period}{" "}
-                      with {classPeriod.teacher} from {start_time} to {end_time}
+                      with {classPeriod.teacher} from {classPeriod.start_time}{" "}
+                      to {classPeriod.end_time}
                     </ListGroup.Item>
                   );
                 })}
@@ -37,12 +31,10 @@ function UserInfo({ userData }) {
           <h6>Current Tutoring Sessions:</h6>
           <Card style={{ width: "26rem" }}>
             <ListGroup variant="flush">
-              {userData.current_sessions.map((session) => {
-                const start_time = format(new Date(session.start), "PPpp");
-                const end_time = format(new Date(session.end), "PPpp");
+              {userData.booked_time_slots.map((session) => {
                 return (
                   <ListGroup.Item key={session.id}>
-                    {start_time} - {end_time}
+                    {session.start_time} - {session.end_time}
                   </ListGroup.Item>
                 );
               })}

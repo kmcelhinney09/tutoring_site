@@ -20,17 +20,8 @@ function UserDashboard() {
     fetch("/user_info").then((res) => {
       if (res.ok) {
         res.json().then((data) => {
-          // console.log(data);
-          setUserData({
-            full_name: data[0].full_name,
-            school: data[6],
-            grade: data[0].grade,
-            role: data[0].role,
-            current_sessions: data[1],
-            tutor_notes: data[3],
-            teacher_notes: data[4],
-            class_schedule: data[5],
-          });
+          console.log(data);
+          setUserData(data);
         });
       }
     });
