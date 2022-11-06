@@ -1,6 +1,5 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
-import ListGroup from "react-bootstrap/ListGroup";
 import Table from "react-bootstrap/esm/Table";
 
 function UserInfo({ userData }) {
@@ -12,7 +11,7 @@ function UserInfo({ userData }) {
           <h6>Grade: {userData.grade}</h6>
           <h6>Role: {userData.role}</h6>
           <h4>Class Schedule</h4>
-          <Table>
+          <Table responsive="md">
             <thead>
               <tr>
                 <th>Class Period</th>
@@ -41,7 +40,7 @@ function UserInfo({ userData }) {
 
           <h4>Current Tutoring Sessions:</h4>
 
-          <Table>
+          <Table responsive="md">
             <thead>
               <tr>
                 <th>Location</th>

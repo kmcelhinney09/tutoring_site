@@ -49,7 +49,7 @@ function TutoringSignup({ school_id }) {
                     <h6>{location.name}</h6>
                   </Row>
                   <Row>
-                    <Table>
+                    <Table responsive="md">
                       <thead>
                         <tr>
                           <th>Session</th>
@@ -58,17 +58,16 @@ function TutoringSignup({ school_id }) {
                           <th>Status</th>
                         </tr>
                       </thead>
-                      
-                        {tutoringInfo.tutoring_time_slots.map((slot) => {
-                          return (
-                            <tbody key={slot.id}>
-                              {slot.location_id == location.id
-                                ? tutoring_slots(slot)
-                                : null}
-                            </tbody>
-                          );
-                        })}
-                      
+
+                      {tutoringInfo.tutoring_time_slots.map((slot) => {
+                        return (
+                          <tbody key={slot.id}>
+                            {slot.location_id == location.id
+                              ? tutoring_slots(slot)
+                              : null}
+                          </tbody>
+                        );
+                      })}
                     </Table>
                   </Row>
                 </Row>
