@@ -4,6 +4,7 @@ import Row from "react-bootstrap/esm/Row";
 import Table from "react-bootstrap/Table";
 
 function TutoringSignup({ school_id }) {
+
   const [tutoringInfo, setTutoringInfo] = useState(false);
 
   useEffect(() => {
@@ -20,18 +21,18 @@ function TutoringSignup({ school_id }) {
     let slot_status;
 
     if (slot_info.booked_status === false) {
-      slot_status = "Sign-up";
+      slot_status = 'Sign-up'
     } else {
-      slot_status = "Full";
+      slot_status = 'Full'
     }
     return (
-      <tr>
-        <td>{slot_info.date}</td>
-        <td>{slot_info.start_time}</td>
-        <td>{slot_info.end_time}</td>
-        <td>{slot_status}</td>
-      </tr>
-    );
+      <tr key={slot_info.id}>
+          <td>{slot_info.date}</td>
+          <td>{slot_info.start_time}</td>
+          <td>{slot_info.end_time}</td>
+          <td>{slot_status}</td>
+        </tr>
+    )
   }
   return (
     <>
@@ -40,41 +41,41 @@ function TutoringSignup({ school_id }) {
           <Row>
             <h1>{tutoringInfo.school_name}</h1>
           </Row>
-          <Row>
-            {tutoringInfo.locations.map((location) => {
-              return (
-                <Row key={location.id}>
-                  <h3>{location.building}</h3>
-                  <Row>
-                    <h6>{location.name}</h6>
+            <Row>
+              {tutoringInfo.locations.map((location) => {
+                return (
+                  <Row key={location.id}>
+                    <h3>{location.building}</h3>
+                    <Row>
+                      <h6>{location.name}</h6>
+                    </Row>
+                    <Row>
+                      <Table>
+                        <thead>
+                          <tr>
+                            <th>Session</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {tutoringInfo.tutoring_time_slots.map((slot) => {
+                            return (
+                              <>
+                                {slot.location_id == location.id ? (
+                                  tutoring_slots(slot)
+                                ) : null}
+                              </>
+                            );
+                          })}
+                        </tbody>
+                      </Table>
+                    </Row>
                   </Row>
-                  <Row>
-                    <Table>
-                      <thead>
-                        <tr>
-                          <th>Session</th>
-                          <th>Start Time</th>
-                          <th>End Time</th>
-                          <th>Status</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {tutoringInfo.tutoring_time_slots.map((slot) => {
-                          return (
-                            <>
-                              {slot.location_id == location.id
-                                ? tutoring_slots(slot)
-                                : null}
-                            </>
-                          );
-                        })}
-                      </tbody>
-                    </Table>
-                  </Row>
-                </Row>
-              );
-            })}
-          </Row>
+                );
+              })}
+            </Row>
         </Container>
       ) : (
         <h1>Loading....</h1>
