@@ -6,7 +6,6 @@ class TutoringTimeSlotSerializer < ActiveModel::Serializer
   belongs_to :school
   
   def date
-    puts object.date_start_time.zone
     date = object.date_start_time.strftime("%A, %b %d")
   end
 

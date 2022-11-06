@@ -1,7 +1,7 @@
 import React from "react";
-import { format } from "date-fns";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
+import Table from "react-bootstrap/esm/Table";
 
 function UserInfo({ userData }) {
   return (
@@ -11,35 +11,58 @@ function UserInfo({ userData }) {
           <h6>School: {userData.school.school_name}</h6>
           <h6>Grade: {userData.grade}</h6>
           <h6>Role: {userData.role}</h6>
-          <h6>Class Schedule</h6>
-          <Card style={{ width: "50rem" }}>
-            <ListGroup variant="flush">
+          <h4>Class Schedule</h4>
+          <Table>
+            <thead>
+              <tr>
+                <th>Class Period</th>
+                <th>Subject</th>
+                <th>Teacher</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+              </tr>
+            </thead>
+            <tbody>
               {userData.student_schedule
                 .sort((a, b) => (a.class_period > b.class_period ? 1 : -1))
                 .map((classPeriod) => {
                   return (
-                    <ListGroup.Item key={classPeriod.id}>
-                      {classPeriod.subject} - Period {classPeriod.class_period}{" "}
-                      with {classPeriod.teacher} from {classPeriod.start_time}{" "}
-                      to {classPeriod.end_time}
-                    </ListGroup.Item>
+                    <tr key={classPeriod.id}>
+                      <td>{classPeriod.class_period}</td>
+                      <td>{classPeriod.subject_name}</td>
+                      <td>{classPeriod.teacher}</td>
+                      <td>{classPeriod.start_time}</td>
+                      <td>{classPeriod.end_time}</td>
+                    </tr>
                   );
                 })}
-            </ListGroup>
-          </Card>
+            </tbody>
+          </Table>
 
-          <h6>Current Tutoring Sessions:</h6>
-          <Card style={{ width: "26rem" }}>
-            <ListGroup variant="flush">
+          <h4>Current Tutoring Sessions:</h4>
+
+          <Table>
+            <thead>
+              <tr>
+                <th>Location</th>
+                <th>Session</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+              </tr>
+            </thead>
+            <tbody>
               {userData.booked_time_slots.map((session) => {
                 return (
-                  <ListGroup.Item key={session.id}>
-                    {session.start_time} - {session.end_time}
-                  </ListGroup.Item>
+                  <tr key={session.id}>
+                    <td>{session.location_name}</td>
+                    <td>{session.date}</td>
+                    <td>{session.start_time}</td>
+                    <td>{session.end_time}</td>
+                  </tr>
                 );
               })}
-            </ListGroup>
-          </Card>
+            </tbody>
+          </Table>
           <h6>Tutor Notes: </h6>
           {userData.tutor_notes.map((note) => {
             return (
@@ -54,7 +77,7 @@ function UserInfo({ userData }) {
             return (
               <Card key={note.id} border="success" style={{ width: "18rem" }}>
                 <Card.Body>{note.teacher_name} says:</Card.Body>
-                <Card.Text>{note.teacher_note}</Card.Text>
+                <Card.Text> {note.teacher_note} </Card.Text>
               </Card>
             );
           })}

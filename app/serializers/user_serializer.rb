@@ -7,7 +7,16 @@ class UserSerializer < ActiveModel::Serializer
 
   def booked_time_slots
     slots = object.booked_time_slots
-    slots.map{|slot| TutoringTimeSlot.find(slot.tutoring_time_slot_id)}
+    booked_slots = slots.map do |slot| 
+      {
+          id:TutoringTimeSlot.find(slot.tutoring_time_slot_id).id,
+          date:TutoringTimeSlot.find(slot.tutoring_time_slot_id).date_start_time.strftime("%A, %b %d"),
+          start_time:TutoringTimeSlot.find(slot.tutoring_time_slot_id).date_start_time.strftime(" %l %M %p"),
+          end_time:TutoringTimeSlot.find(slot.tutoring_time_slot_id).date_end_time.strftime(" %l %M %p"),
+          location_name:Location.find(TutoringTimeSlot.find(slot.tutoring_time_slot_id).location_id).name
+      }
+    end
+    # booked_slots = slots.map{|slot| TutoringTimeSlot.find(slot.tutoring_time_slot_id)}
   end
 
   def teacher_notes
