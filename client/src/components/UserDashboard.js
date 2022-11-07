@@ -29,18 +29,13 @@ function UserDashboard() {
 
   return (
     <div>
-      <Tab.Container id="left-tabs-example" defaultActiveKey="userHome">
+      <Tab.Container id="left-tabs-example" defaultActiveKey="dashboard">
         <Row>
           <Col sm={3}>
             <Nav variant="pills" className="flex-column">
-              <Nav.Item>
-                <Nav.Link eventKey="userHome">User Home</Nav.Link>
-              </Nav.Item>
-              {userRole === "tutee" || userRole === "tutor" ? (
                 <Nav.Item>
                   <Nav.Link eventKey="dashboard">Dashboard</Nav.Link>
                 </Nav.Item>
-              ) : null}
               <Nav.Item>
                 <Nav.Link eventKey="tutoringSignup">Tutoring Sign-up</Nav.Link>
               </Nav.Item>
