@@ -64,9 +64,6 @@ function UserDashboard() {
           </Col>
           <Col sm={9}>
             <Tab.Content>
-              <Tab.Pane eventKey="userHome">
-                <h1>User Home</h1>
-              </Tab.Pane>
               <Tab.Pane eventKey="dashboard">
                 <UserInfo userData={userData} />
               </Tab.Pane>
