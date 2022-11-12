@@ -16,7 +16,7 @@ class UserSerializer < ActiveModel::Serializer
           location_name:Location.find(TutoringTimeSlot.find(slot.tutoring_time_slot_id).location_id).name
       }
     end
-    # booked_slots = slots.map{|slot| TutoringTimeSlot.find(slot.tutoring_time_slot_id)}
+    
   end
 
   def teacher_notes

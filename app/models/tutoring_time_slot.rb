@@ -22,7 +22,6 @@ class TutoringTimeSlot < ApplicationRecord
   def num_tutors
     signed_up = self.tutor_slot_sign_ups
     tutor_list = signed_up.map(&:tutor_id)
-    puts tutor_list
     num_tutors = tutor_list.uniq.count
   end
 

@@ -34,7 +34,7 @@ puts "Creating Online Resources"
 10.times do
 OnlineResource.create!(
   title:Faker::Educator.course_name,
-  url:Faker::Internet.url,
+  url:"https://www.ck12.org/student/",
   owner_id:rand(1..10),
   subject_id:rand(1..10),
   tag:Faker::Company.profession 

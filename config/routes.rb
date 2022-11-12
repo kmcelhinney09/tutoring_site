@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
   get "/user_info", to: "sessions#info"
   get "/school/:id/tutoring", to: "schools#index"
+  get "/school/:id/online_resources", to: "online_resources#index"
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }

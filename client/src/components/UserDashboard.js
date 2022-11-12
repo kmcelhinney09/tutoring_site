@@ -33,9 +33,9 @@ function UserDashboard() {
         <Row>
           <Col sm={3}>
             <Nav variant="pills" className="flex-column">
-                <Nav.Item>
-                  <Nav.Link eventKey="dashboard">Dashboard</Nav.Link>
-                </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="dashboard">Dashboard</Nav.Link>
+              </Nav.Item>
               <Nav.Item>
                 <Nav.Link eventKey="tutoringSignup">Tutoring Sign-up</Nav.Link>
               </Nav.Item>
@@ -62,7 +62,7 @@ function UserDashboard() {
               ) : null}
             </Nav>
           </Col>
-          <Col sm={9}>
+          <Col sm={8}>
             <Tab.Content>
               <Tab.Pane eventKey="dashboard">
                 <UserInfo userData={userData} />
@@ -80,7 +80,7 @@ function UserDashboard() {
                 <AdminControl />
               </Tab.Pane>
               <Tab.Pane eventKey="onlineResources">
-                <OnlineResources />
+                <OnlineResources school_id={userSchool} />
               </Tab.Pane>
             </Tab.Content>
           </Col>
