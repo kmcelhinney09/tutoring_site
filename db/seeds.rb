@@ -37,8 +37,19 @@ OnlineResource.create!(
   url:"https://www.ck12.org/student/",
   owner_id:rand(1..10),
   subject_id:rand(1..10),
-  tag:Faker::Company.profession 
 )
+end
+
+puts "Creating Tags"
+50.times do
+  Tag.create(title:Faker::Company.profession )
+end
+
+puts "Creating Tag Links"
+50.times do
+  tag = rand(1..50)
+  resource = rand(1..10)
+  TagLink.create(tag_id:tag, online_resource_id:resource)
 end
 
 puts "Creating Locations"

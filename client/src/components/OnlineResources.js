@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 
 function OnlineResources({ school_id }) {
   const [resourceInfo, setResourceInfo] = useState(false);
@@ -35,7 +36,15 @@ function OnlineResources({ school_id }) {
                       Resource link
                     </Card.Link>
                   </Card.Body>
-                  <Card.Footer></Card.Footer>
+                  <Card.Footer>
+                    {resource.tags.map((tag) => {
+                      return (
+                        <Button variant="primary" className="m-2">
+                          {tag.title}
+                        </Button>
+                      );
+                    })}
+                  </Card.Footer>
                 </Card>
               </Col>
             );

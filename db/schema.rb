@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 2022_11_12_213450) do
   end
 
   create_table "tag_links", force: :cascade do |t|
-    t.integer "resource_id"
+    t.integer "online_resource_id"
     t.integer "tag_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

@@ -1,5 +1,5 @@
 class OnlineResourceSerializer < ActiveModel::Serializer
-  belongs_to :school
   belongs_to :subject
-  attributes :id, :title, :url, :owner_id, :description, :subject_id, :tag
+  has_many :tags, through: :tag_links
+  attributes :id, :title, :url, :owner_id, :description, :subject_id, :tags
 end

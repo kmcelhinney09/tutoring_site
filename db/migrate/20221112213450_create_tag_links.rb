@@ -1,7 +1,7 @@
 class CreateTagLinks < ActiveRecord::Migration[6.1]
   def change
     create_table :tag_links do |t|
-      t.integer :resource_id
+      t.integer :online_resource_id
       t.integer :tag_id
 
       t.timestamps
