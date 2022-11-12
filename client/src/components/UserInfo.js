@@ -68,7 +68,7 @@ function UserInfo({ userData }) {
           <Row xs={1} md={2} className="g-4">
             {userData.tutor_notes.map((note) => {
               return (
-                <Col>
+                <Col key={note.id}>
                   <Card border="success">
                     <Card.Body>
                       <Card.Title>{note.tutor_name} says:</Card.Title>
@@ -83,7 +83,7 @@ function UserInfo({ userData }) {
           <Row xs={1} md={2} className="g-4">
           {userData.teacher_notes.map((note) => {
             return (
-              <Col>
+              <Col key={note.id}>
                 <Card border="success">
                   <Card.Body>
                     <Card.Title>{note.teacher_name} says:</Card.Title>

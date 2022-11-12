@@ -10,6 +10,7 @@ function TutoringSignup({ school_id }) {
     fetch(`/school/${school_id}/tutoring`).then((res) => {
       if (res.ok) {
         res.json().then((data) => {
+          console.log(data);
           setTutoringInfo(data);
         });
       }
@@ -20,16 +21,18 @@ function TutoringSignup({ school_id }) {
     let slot_status;
 
     if (slot_info.booked_status === false) {
-      slot_status = "Sign-up";
+      slot_status = <td className="text-success">Sign-up</td>;
     } else {
-      slot_status = "Full";
+      slot_status = <td className="text-danger">Full</td>;
     }
     return (
       <tr>
         <td>{slot_info.date}</td>
+        <td>{slot_info.tutors_count}</td>
         <td>{slot_info.start_time}</td>
         <td>{slot_info.end_time}</td>
-        <td>{slot_status}</td>
+        <td>{slot_info.tutee_space}</td>
+        {slot_status}
       </tr>
     );
   }
@@ -53,8 +56,10 @@ function TutoringSignup({ school_id }) {
                       <thead>
                         <tr>
                           <th>Session</th>
+                          <th>Number of Tutors</th>
                           <th>Start Time</th>
                           <th>End Time</th>
+                          <th>Open Slots</th>
                           <th>Status</th>
                         </tr>
                       </thead>
