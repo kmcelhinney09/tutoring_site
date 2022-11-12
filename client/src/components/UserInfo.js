@@ -1,6 +1,8 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/esm/Table";
+import Row from "react-bootstrap/esm/Row";
+import Col from "react-bootstrap/esm/Col";
 
 function UserInfo({ userData }) {
   return (
@@ -63,23 +65,35 @@ function UserInfo({ userData }) {
             </tbody>
           </Table>
           <h6>Tutor Notes: </h6>
-          {userData.tutor_notes.map((note) => {
-            return (
-              <Card key={note.id} border="success" style={{ width: "18rem" }}>
-                <Card.Body>{note.tutor_name} says:</Card.Body>
-                <Card.Text>{note.tutor_note}</Card.Text>
-              </Card>
-            );
-          })}
+          <Row xs={1} md={2} className="g-4">
+            {userData.tutor_notes.map((note) => {
+              return (
+                <Col>
+                  <Card border="success">
+                    <Card.Body>
+                      <Card.Title>{note.tutor_name} says:</Card.Title>
+                      <Card.Text>{note.tutor_note}</Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              );
+            })}
+          </Row>
           <h6>Teacher Notes:</h6>
+          <Row xs={1} md={2} className="g-4">
           {userData.teacher_notes.map((note) => {
             return (
-              <Card key={note.id} border="success" style={{ width: "18rem" }}>
-                <Card.Body>{note.teacher_name} says:</Card.Body>
-                <Card.Text> {note.teacher_note} </Card.Text>
-              </Card>
+              <Col>
+                <Card border="success">
+                  <Card.Body>
+                    <Card.Title>{note.teacher_name} says:</Card.Title>
+                    <Card.Text>{note.teacher_note}</Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
             );
           })}
+          </Row>
         </div>
       ) : (
         <h1>Loading</h1>
