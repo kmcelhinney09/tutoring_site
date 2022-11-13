@@ -52,11 +52,19 @@ puts "Creating Tag Links"
   TagLink.create(tag_id:tag, online_resource_id:resource)
 end
 
+puts "Creating Buildings"
+20.times do
+  name = Faker::Educator.campus + " Hall"
+  school = rand(1..10)
+  Building.create(name:name, school_id:school)
+end
+
+
 puts "Creating Locations"
 10.times do
   Location.create!(
     name:"Room number: #{ rand(1..400)}", 
-    building:Faker::Educator.campus + " Hall",
+    building:rand(1..20),
     capacity:rand(1..15),
     school_id:rand(1..10),
     tutoring_time_slot_id:rand(1..10)

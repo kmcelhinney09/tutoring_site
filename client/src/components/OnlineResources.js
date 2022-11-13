@@ -24,7 +24,7 @@ function OnlineResources({ school_id }) {
         <Row xs={1} md={2} className="g-4">
           {resourceInfo.map((resource) => {
             return (
-              <Col md={4}>
+              <Col md={4} key={resource.id}>
                 <Card>
                   <Card.Header className="bg-primary text-white">
                     {resource.subject.name}
@@ -39,7 +39,8 @@ function OnlineResources({ school_id }) {
                   <Card.Footer>
                     {resource.tags.map((tag) => {
                       return (
-                        <Button variant="primary" className="m-2">
+                        <Button key={tag.id} variant="primary" className="m-2">
+                          {tag.id}
                           {tag.title}
                         </Button>
                       );
