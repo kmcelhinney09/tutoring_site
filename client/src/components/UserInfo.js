@@ -55,7 +55,9 @@ function UserInfo({ userData }) {
               {userData.booked_time_slots.map((session) => {
                 return (
                   <tr key={session.id}>
-                    <td>{session.location_name}</td>
+                    <td>
+                      {session.building_name} - {session.location_name}
+                    </td>
                     <td>{session.date}</td>
                     <td>{session.start_time}</td>
                     <td>{session.end_time}</td>
@@ -81,18 +83,18 @@ function UserInfo({ userData }) {
           </Row>
           <h6>Teacher Notes:</h6>
           <Row xs={1} md={2} className="g-4">
-          {userData.teacher_notes.map((note) => {
-            return (
-              <Col key={note.id}>
-                <Card border="success">
-                  <Card.Body>
-                    <Card.Title>{note.teacher_name} says:</Card.Title>
-                    <Card.Text>{note.teacher_note}</Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-            );
-          })}
+            {userData.teacher_notes.map((note) => {
+              return (
+                <Col key={note.id}>
+                  <Card border="success">
+                    <Card.Body>
+                      <Card.Title>{note.teacher_name} says:</Card.Title>
+                      <Card.Text>{note.teacher_note}</Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              );
+            })}
           </Row>
         </div>
       ) : (

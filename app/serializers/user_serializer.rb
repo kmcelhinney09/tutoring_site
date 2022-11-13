@@ -13,7 +13,8 @@ class UserSerializer < ActiveModel::Serializer
           date:TutoringTimeSlot.find(slot.tutoring_time_slot_id).date_start_time.strftime("%A, %b %d"),
           start_time:TutoringTimeSlot.find(slot.tutoring_time_slot_id).date_start_time.strftime(" %l %M %p"),
           end_time:TutoringTimeSlot.find(slot.tutoring_time_slot_id).date_end_time.strftime(" %l %M %p"),
-          location_name:Location.find(TutoringTimeSlot.find(slot.tutoring_time_slot_id).location_id).name
+          location_name:Location.find(TutoringTimeSlot.find(slot.tutoring_time_slot_id).location_id).name,
+          building_name:Building.find(Location.find(TutoringTimeSlot.find(slot.tutoring_time_slot_id).location_id).building_id).name
       }
     end
     

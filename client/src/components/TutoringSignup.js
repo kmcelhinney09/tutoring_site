@@ -44,37 +44,43 @@ function TutoringSignup({ school_id }) {
             <h1>{tutoringInfo.school_name}</h1>
           </Row>
           <Row>
-            {tutoringInfo.locations.map((location) => {
+            {tutoringInfo.locations.map((buildings) => {
               return (
-                <Row key={location.id}>
-                  <h3>{location.building}</h3>
-                  <Row>
-                    <h6>{location.name}</h6>
-                  </Row>
-                  <Row>
-                    <Table responsive="md">
-                      <thead>
-                        <tr>
-                          <th>Session</th>
-                          <th>Number of Tutors</th>
-                          <th>Start Time</th>
-                          <th>End Time</th>
-                          <th>Open Slots</th>
-                          <th>Status</th>
-                        </tr>
-                      </thead>
+                <Row key={buildings[0]}>
+                  <h3>{buildings[0]}</h3>
+                  {buildings[1].map((building_location) => {
+                    return (
+                      <Row key={building_location.id}>
+                        <Row>
+                          <h6>{building_location.name}</h6>
+                        </Row>
+                        <Row>
+                          <Table responsive="md">
+                            <thead>
+                              <tr>
+                                <th>Session</th>
+                                <th>Number of Tutors</th>
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                                <th>Open Slots</th>
+                                <th>Status</th>
+                              </tr>
+                            </thead>
 
-                      {tutoringInfo.tutoring_time_slots.map((slot) => {
-                        return (
-                          <tbody key={slot.id}>
-                            {slot.location_id == location.id
-                              ? tutoring_slots(slot)
-                              : null}
-                          </tbody>
-                        );
-                      })}
-                    </Table>
-                  </Row>
+                            {tutoringInfo.tutoring_time_slots.map((slot) => {
+                              return (
+                                <tbody key={slot.id}>
+                                  {slot.location_id == building_location.id
+                                    ? tutoring_slots(slot)
+                                    : null}
+                                </tbody>
+                              );
+                            })}
+                          </Table>
+                        </Row>
+                      </Row>
+                    );
+                  })}
                 </Row>
               );
             })}
