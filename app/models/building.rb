@@ -1,4 +1,4 @@
 class Building < ApplicationRecord
   belongs_to :school
-  has_one :location
+  has_many :locations
 end

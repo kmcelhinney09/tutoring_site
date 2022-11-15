@@ -3,6 +3,7 @@ import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/esm/Table";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
+import { Link } from "react-router-dom";
 
 function UserInfo({ userData }) {
   return (
