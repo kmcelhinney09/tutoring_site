@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import Table from "react-bootstrap/Table";
+import Button from 'react-bootstrap/Button'
 
 function TutoringSignup({ school_id }) {
   const [tutoringInfo, setTutoringInfo] = useState(false);
@@ -21,7 +22,7 @@ function TutoringSignup({ school_id }) {
     let slot_status;
 
     if (slot_info.booked_status === false) {
-      slot_status = <td className="text-success">Sign-up</td>;
+      slot_status = <td><Button>Sign-up</Button></td>;
     } else {
       slot_status = <td className="text-danger">Full</td>;
     }
