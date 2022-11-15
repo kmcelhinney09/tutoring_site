@@ -28,11 +28,12 @@ function TutoringSignup({ school_id }) {
     }
     return (
       <tr>
-        <td>{slot_info.date}</td>
-        <td>{slot_info.tutors_count}</td>
-        <td>{slot_info.start_time}</td>
-        <td>{slot_info.end_time}</td>
-        <td>{slot_info.tutee_space}</td>
+        <td className="text-center">{slot_info.date}</td>
+        <td className="text-center">{slot_info.tutors_count}</td>
+        <td className="text-center">Biology Place Holder</td>
+        <td className="text-center">{slot_info.start_time}</td>
+        <td className="text-center">{slot_info.end_time}</td>
+        <td className="text-center">{slot_info.tutee_space}</td>
         {slot_status}
       </tr>
     );
@@ -59,12 +60,13 @@ function TutoringSignup({ school_id }) {
                           <Table responsive="md">
                             <thead>
                               <tr>
-                                <th>Session</th>
-                                <th>Number of Tutors</th>
-                                <th>Start Time</th>
-                                <th>End Time</th>
-                                <th>Open Slots</th>
-                                <th>Status</th>
+                                <th className="text-center">Session</th>
+                                <th className="text-center">Number of Tutors</th>
+                                <th className="text-center">Subjects Covered</th>
+                                <th className="text-center">Start Time</th>
+                                <th className="text-center">End Time</th>
+                                <th className="text-center">Open Slots</th>
+                                <th className="text-center">Status</th>
                               </tr>
                             </thead>
 
