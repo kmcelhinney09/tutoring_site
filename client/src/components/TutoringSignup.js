@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { useAuth } from "../context/AuthProvider";
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import Table from "react-bootstrap/Table";
-import Button from 'react-bootstrap/Button'
+import Button from "react-bootstrap/Button";
 
 function TutoringSignup({ school_id }) {
   const [tutoringInfo, setTutoringInfo] = useState(false);
+  const userId = useAuth().currentUser.id;
 
   useEffect(() => {
     fetch(`/school/${school_id}/tutoring`).then((res) => {
@@ -18,11 +20,20 @@ function TutoringSignup({ school_id }) {
     });
   }, [school_id]);
 
+  function book_tutoring(sessionInfo) {
+    console.log(userId, sessionInfo);
+  }
+
   function tutoring_slots(slot_info) {
     let slot_status;
 
     if (slot_info.booked_status === false) {
-      slot_status = <td><Button>Sign-up</Button></td>;
+      slot_status = (
+        <td>
+          <Button onClick={() => book_tutoring(slot_info)}>Sign-up</Button>
+          {console.log(userId)}
+        </td>
+      );
     } else {
       slot_status = <td className="text-danger">Full</td>;
     }
@@ -30,7 +41,7 @@ function TutoringSignup({ school_id }) {
       <tr>
         <td className="text-center">{slot_info.date}</td>
         <td className="text-center">{slot_info.tutors_count}</td>
-        <td className="text-center">Biology Place Holder</td>
+        <td className="text-center">{slot_info.subjects_covered}</td>
         <td className="text-center">{slot_info.start_time}</td>
         <td className="text-center">{slot_info.end_time}</td>
         <td className="text-center">{slot_info.tutee_space}</td>
@@ -61,8 +72,12 @@ function TutoringSignup({ school_id }) {
                             <thead>
                               <tr>
                                 <th className="text-center">Session</th>
-                                <th className="text-center">Number of Tutors</th>
-                                <th className="text-center">Subjects Covered</th>
+                                <th className="text-center">
+                                  Number of Tutors
+                                </th>
+                                <th className="text-center">
+                                  Subjects Covered
+                                </th>
                                 <th className="text-center">Start Time</th>
                                 <th className="text-center">End Time</th>
                                 <th className="text-center">Open Slots</th>

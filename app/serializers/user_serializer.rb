@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :full_name,:school_id,:grade,:role, :teacher_notes, :tutor_notes
+  attributes :id, :full_name,:school_id,:grade,:role, :teacher_notes, :tutor_notes
   has_many :booked_time_slots, foreign_key: 'tutee_id'
   has_many :tutor_slot_sign_ups, class_name: 'TutorSlotSignUp', foreign_key: 'tutor_id'
   has_many :student_schedule, class_name: 'ClassSchedule', foreign_key: 'student_id'

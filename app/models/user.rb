@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :tutor_slot_sign_ups, class_name: 'TutorSlotSignUp', foreign_key: 'tutor_id'
   has_many :student_schedule, class_name: 'ClassSchedule', foreign_key: 'student_id'
   has_many :teacher_schedule, class_name: 'ClassSchedule', foreign_key: 'teacher_id'
+  has_many :tutored_subjects, class_name: 'TutoredSubject', foreign_key: 'tutor_id'
+  has_many :subjects_signed_up, :through => :tutored_subjects, :source => 'subject'
   
   belongs_to :school
 
