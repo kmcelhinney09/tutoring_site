@@ -26,28 +26,32 @@ function TutoringSignup({ school_id }) {
 
   function tutoring_slots(slot_info) {
     let slot_status;
+    let slot_return;
 
-    if (slot_info.booked_status === false) {
-      slot_status = (
-        <td>
-          <Button onClick={() => book_tutoring(slot_info)}>Sign-up</Button>
-          {console.log(userId)}
-        </td>
+    slot_return = slot_info.tutors.map((tutor) => {
+      if (slot_info.booked_status === false) {
+        slot_status = (
+          <td>
+            <Button onClick={() => book_tutoring(slot_info)}>Sign-up</Button>
+            {console.log(userId)}
+          </td>
+        );
+      } else {
+        slot_status = <td className="text-danger">Full</td>;
+      }
+      return (
+        <tr>
+          <td className="text-center">{slot_info.date}</td>
+          <td className="text-center">{tutor.full_name}</td>
+          <td className="text-center">{slot_info.subjects_covered}</td>
+          <td className="text-center">{slot_info.start_time}</td>
+          <td className="text-center">{slot_info.end_time}</td>
+          <td className="text-center">{slot_info.tutee_space}</td>
+          {slot_status}
+        </tr>
       );
-    } else {
-      slot_status = <td className="text-danger">Full</td>;
-    }
-    return (
-      <tr>
-        <td className="text-center">{slot_info.date}</td>
-        <td className="text-center">{slot_info.tutors_count}</td>
-        <td className="text-center">{slot_info.subjects_covered}</td>
-        <td className="text-center">{slot_info.start_time}</td>
-        <td className="text-center">{slot_info.end_time}</td>
-        <td className="text-center">{slot_info.tutee_space}</td>
-        {slot_status}
-      </tr>
-    );
+    });
+    return slot_return;
   }
   return (
     <>
@@ -72,9 +76,7 @@ function TutoringSignup({ school_id }) {
                             <thead>
                               <tr>
                                 <th className="text-center">Session</th>
-                                <th className="text-center">
-                                  Number of Tutors
-                                </th>
+                                <th className="text-center">Tutor</th>
                                 <th className="text-center">
                                   Subjects Covered
                                 </th>

@@ -1,5 +1,5 @@
 class TutoringTimeSlotSerializer < ActiveModel::Serializer
-  attributes :id, :created_by, :tutors_count, :tutee_space, :booked_status, :date, :start_time, :end_time, :location_id, :subjects_covered
+  attributes :id, :created_by, :tutors, :tutee_space, :booked_status, :date, :start_time, :end_time, :location_id, :subjects_covered
    
   has_many :booked_time_slots
   belongs_to :location
