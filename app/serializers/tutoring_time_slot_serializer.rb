@@ -1,5 +1,5 @@
 class TutoringTimeSlotSerializer < ActiveModel::Serializer
-  attributes :id, :created_by, :tutors, :tutee_space, :booked_status, :date, :start_time, :end_time, :location_id, :subjects_covered
+  attributes :id, :created_by, :tutors, :tutee_space, :booked_status, :date, :start_time, :end_time, :location_id
    
   has_many :booked_time_slots
   belongs_to :location
@@ -29,21 +29,14 @@ class TutoringTimeSlotSerializer < ActiveModel::Serializer
     tutor_data = []
     
     tutors.each do |tutor|
-      tutor_data.push({id:tutor.id, full_name:tutor.full_name})
+      subjects = []
+      tutor.subjects_signed_up.each do |sub|
+        subjects.push(sub.name)
+      end
+
+      tutor_data.push({id:tutor.id, full_name:tutor.full_name, subjects_covered:subjects * ", "})
     end
     tutor_data
-  end
-
-  def subjects_covered
-    subjects = []
-    tutors = object.tutors
-    tutors.each do |tutor|
-      selected_subjects = tutor.subjects_signed_up
-      selected_subjects.each do |subject|
-        subjects.push(subject.name)
-      end
-    end
-    return subjects * ", "
   end
 
 end

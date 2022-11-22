@@ -39,10 +39,10 @@ function TutoringSignup({ school_id }) {
         slot_status = <td className="text-danger">Full</td>;
       }
       return (
-        <tr key={slot_info.id}>
+        <tr key={slot_info.id + tutor.full_name}>
           <td className="text-center">{slot_info.date}</td>
           <td className="text-center">{tutor.full_name}</td>
-          <td className="text-center">{slot_info.subjects_covered}</td>
+          <td className="text-center">{tutor.subjects_covered}</td>
           <td className="text-center">{slot_info.start_time}</td>
           <td className="text-center">{slot_info.end_time}</td>
           <td className="text-center">{slot_info.tutee_space}</td>
