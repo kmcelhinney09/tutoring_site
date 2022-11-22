@@ -1,9 +1,13 @@
 class TutoringTimeSlotSerializer < ActiveModel::Serializer
-  attributes :id, :created_by, :tutors, :tutee_space, :booked_status, :date, :start_time, :end_time, :location_id
+  attributes :id, :created_by, :tutors, :tutee_space, :booked_status, :date, :start_time, :end_time, :location_id, :date_sort
    
   has_many :booked_time_slots
   belongs_to :location
   belongs_to :school
+  
+  def date_sort
+    object.date_start_time.to_f()
+  end
   
   def date
     date = object.date_start_time.strftime("%A, %b %d")

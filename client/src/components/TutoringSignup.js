@@ -38,6 +38,7 @@ function TutoringSignup({ school_id }) {
       } else {
         slot_status = <td className="text-danger">Full</td>;
       }
+
       return (
         <tr key={slot_info.id + tutor.full_name}>
           <td className="text-center">{slot_info.date}</td>
@@ -85,16 +86,19 @@ function TutoringSignup({ school_id }) {
                                 <th className="text-center">Status</th>
                               </tr>
                             </thead>
-
-                            {tutoringInfo.tutoring_time_slots.map((slot) => {
-                              return (
-                                <tbody key={slot.id}>
-                                  {slot.location_id == building_location.id
-                                    ? tutoring_slots(slot)
-                                    : null}
-                                </tbody>
-                              );
-                            })}
+                            {tutoringInfo.tutoring_time_slots
+                              .sort((a, b) =>
+                                a.date_sort > b.date_sort ? 1 : -1
+                              )
+                              .map((slot) => {
+                                return (
+                                  <tbody key={slot.id}>
+                                    {slot.location_id == building_location.id
+                                      ? tutoring_slots(slot)
+                                      : null}
+                                  </tbody>
+                                );
+                              })}
                           </Table>
                         </Row>
                       </Row>
