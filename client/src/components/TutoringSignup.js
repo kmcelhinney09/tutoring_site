@@ -20,8 +20,19 @@ function TutoringSignup({ school_id }) {
     });
   }, [school_id]);
 
-  function book_tutoring(sessionInfo) {
-    console.log(userId, sessionInfo);
+  function book_tutoring(tutor_id, slot_id) {
+    console.log(`${userId}, ${tutor_id}, ${slot_id}`);
+    fetch("/booked_time_slots", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        tutor_id: tutor_id,
+        tutee_id: userId,
+        tutoring_time_slot_id: slot_id,
+      }),
+    });
   }
 
   function tutoring_slots(slot_info) {
@@ -32,7 +43,9 @@ function TutoringSignup({ school_id }) {
       if (slot_info.booked_status === false) {
         slot_status = (
           <td>
-            <Button onClick={() => book_tutoring(slot_info)}>Sign-up</Button>
+            <Button onClick={() => book_tutoring(tutor.id, slot_info.id)}>
+              Sign-up
+            </Button>
           </td>
         );
       } else {
