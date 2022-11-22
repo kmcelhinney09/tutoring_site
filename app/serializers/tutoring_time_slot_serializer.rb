@@ -24,6 +24,15 @@ class TutoringTimeSlotSerializer < ActiveModel::Serializer
   def tutors_count
     tutors = object.tutor_capacity - object.num_tutors
   end
+  def tutors
+    tutors = object.tutors
+    tutor_data = []
+    
+    tutors.each do |tutor|
+      tutor_data.push({id:tutor.id, full_name:tutor.full_name})
+    end
+    tutor_data
+  end
 
   def subjects_covered
     subjects = []

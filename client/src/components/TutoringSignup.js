@@ -33,14 +33,13 @@ function TutoringSignup({ school_id }) {
         slot_status = (
           <td>
             <Button onClick={() => book_tutoring(slot_info)}>Sign-up</Button>
-            {console.log(userId)}
           </td>
         );
       } else {
         slot_status = <td className="text-danger">Full</td>;
       }
       return (
-        <tr>
+        <tr key={slot_info.id}>
           <td className="text-center">{slot_info.date}</td>
           <td className="text-center">{tutor.full_name}</td>
           <td className="text-center">{slot_info.subjects_covered}</td>
